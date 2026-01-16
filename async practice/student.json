@@ -1,0 +1,14 @@
+{
+  "name": "Fahim",
+  "id": "IT22016",
+  "course": [
+    "DSA",
+    "Algo"
+  ],
+  "friend": [
+    {
+      "name": "Jisan",
+      "id": "CHE22017"
+    }
+  ]
+}

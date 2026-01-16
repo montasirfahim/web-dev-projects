@@ -1,0 +1,10 @@
+body{
+	margin: 5% 10%;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+}
+.status-div{
+	display: block;
+	text-align: center;
+}
