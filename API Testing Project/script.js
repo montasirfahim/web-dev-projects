@@ -29,3 +29,43 @@ async function checkEmailValidity(event) {
 		alert(err);
 	}
 }
+
+async function checkWeather(event) {
+	event.preventDefault();
+    const apiKey = "d55933b57094e92b620ef61c90511ebc";
+    const cityName = document.getElementById("city").value;
+    const resultDiv = document.getElementById("status-div2");
+    const oldStatus = document.getElementById("status2");
+
+    if (!cityName) {
+        alert("Please enter a city name");
+        return;
+    }
+
+    oldStatus.innerText = "Searching...";
+    oldStatus.style.display = "block";
+    resultDiv.style.display = "none";  
+
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        oldStatus.style.display = "none";
+
+        if (data.cod === "404") {
+            resultDiv.innerHTML = `<p style="color:red;">City not found. Please try again.</p>`;
+        } else {
+            resultDiv.innerHTML = `
+                <h3>Weather in ${data.name}, ${data.sys.country}</h3>
+                <p><b>Temperature:</b> ${data.main.temp}°C</p>
+                <p><b>Condition:</b> ${data.weather[0].description}</p>
+                <p><b>Humidity:</b> ${data.main.humidity}%</p>
+            `;
+            resultDiv.style.display = "block";
+        }
+    } catch (error) {
+        console.error("Error fetching weather:", error);
+        oldStatus.innerText = "Error loading data.";
+    }
+}
