@@ -31,7 +31,7 @@ async function checkEmailValidity(event) {
 }
 
 async function checkWeather(event) {
-	event.preventDefault();
+	if(event) event.preventDefault();
     const apiKey = "d55933b57094e92b620ef61c90511ebc";
     const cityName = document.getElementById("city").value;
     const resultDiv = document.getElementById("status-div2");
@@ -41,6 +41,7 @@ async function checkWeather(event) {
         alert("Please enter a city name");
         return;
     }
+    console.log(cityName);
 
     oldStatus.innerText = "Searching...";
     oldStatus.style.display = "block";
